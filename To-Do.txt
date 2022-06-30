@@ -1,0 +1,45 @@
+Task 1:
+    End-point + Form:
+        - first_name
+        - last_name
+        - country_code (string)
+        - phone_number (validation: E.164 format, +xxxx ...etc, string)
+        - gender (options => select => male | female)
+        - birthday
+        - avatar (file_type accepts jpg, jpeg &png)
+        - email
+
+Responses:
+    Example successful Response for a POST request should be as following:
+    { "id": 1, "first_name": "Ali", "last_name": "Gamal", "country_code":
+    "EG", "phone_number": "01001234567", "gender": "male", "birthdate":
+    "1988-03-29" }
+    Failing should be formatted as following:
+    { "errors": { "first_name": [ { "error": "blank" } ], "last_name": [ { "error":
+    "blank" } ], "country_code":[ { "error": "inclusion" } ], "phone_number":
+    [ { "error": "blank" }, { "error": "not_a_number" }, { "error":
+    "not_exist" }, { "error": "invalid" }, { "error": "taken" }, { "error":
+    "too_short", "count": 10 }, { "error": "too_long", "count": 15 } ], "gender":
+    [ { "error": "inclusion" } ], "birthdate": [ { "error": "blank" },
+    { "error": "in_the_future" } ], "avatar": [ { "error": "blank" }, { "error":
+    "invalid_content_type" } ], "email": [{ "error": "taken" }, { "error":
+    "invalid" } ] } }
+
+Note: HTTP status code is 201 if new user else the suitable http status code
+should be returned.  
+
+-------------------------------------------------------------------------------
+
+Task 2:
+End-point accepts PASSWORD & PHONE NUMBER & returns unique AUTH-TOKEN along the response upon success.
+
+-------------------------------------------------------------------------------
+
+Task 3:
+    * Based on tasks(1 & 2), END-POINT accepts these fileds in POST request:
+        1. phone_number
+        2.auth-token
+        3.status
+    * Response:
+        - Successful response: creates a status object linked to the user object.
+        - Unseuccessful : UNAUTHORIZED REQUEST OR BAD REQUEST based on (auth-token & phone number) combination.
