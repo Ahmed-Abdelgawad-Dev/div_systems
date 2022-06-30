@@ -10,18 +10,18 @@ class CustomUserAdmin(UserAdmin):
     form = CustomUserChangeForm
 
     list_display = ('first_name', 'last_name',
-                    'country_code', 'phone_number', 'gender', 'birthdate', 'is_admin', 'email', 'is_staff', 'is_active', 'date_joined')
+                    'country_code', 'phone_number', 'gender', 'birthdate', 'is_admin', 'avatar', 'email', 'is_staff', 'is_active', 'date_joined')
     list_filter = ('is_admin',)
     fieldsets = (
         (None, {'fields': ('first_name', 'password')}),
         ('Personal info', {'fields': (
-            'country_code', 'phone_number', 'gender', 'birthdate', 'email',)}),
+            'country_code', 'phone_number', 'gender', 'birthdate', 'avatar', 'email',)}),
         ('Permissions', {'fields': ('is_admin', 'is_staff', 'is_active',)}),
     )
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('first_name', 'last_name', 'country_code', 'phone_number', 'gender', 'birthdate', 'email', 'password1', 'password2'),
+            'fields': ('first_name', 'last_name', 'country_code', 'phone_number', 'gender', 'birthdate', 'avatar', 'email', 'password1', 'password2'),
         }),
     )
     search_fields = ('first_name', 'last_name')

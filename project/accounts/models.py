@@ -25,9 +25,10 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     birthdate = models.DateField(
         _("Birthdate"), default=datetime.date(2010, 1, 1),
         auto_now_add=False, auto_now=False)
-    # avatar = models.ImageField(upload_to='avatars/')
+    avatar = models.ImageField(
+        upload_to='avatars/', default='images/default_image.png')
     email = models.EmailField(
-        _('email address'), unique=True, blank=True, null=True, help_text=u"Please enter your Email...")
+        _('email address'), unique=True, blank=True, null=True, help_text="Please enter your Email...")
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
