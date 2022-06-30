@@ -9,29 +9,26 @@ class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
 
-    # list_display = ('username', 'first_name', 'last_name',
-    #                 'is_admin', 'is_staff', 'is active', 'date_joined')
-    # list_filter = ('is_admin',)
+    list_display = ('first_name', 'last_name',
+                    'country_code', 'phone_number', 'gender', 'birthdate', 'is_admin', 'email', 'is_staff', 'is_active', 'date_joined')
+    list_filter = ('is_admin',)
     fieldsets = (
-        (None, {'fields': ('username', 'password')}),
-        ('Personal info', {'fields': ('first_name', 'last_name',)}),
-        ('Permissions', {'fields': ('is_admin',)}),
+        (None, {'fields': ('first_name', 'password')}),
+        ('Personal info', {'fields': (
+            'country_code', 'phone_number', 'gender', 'birthdate', 'email',)}),
+        ('Permissions', {'fields': ('is_admin', 'is_staff', 'is_active',)}),
     )
-    # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
-    # overrides get_fieldsets to use this attribute when creating a user.
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('username', 'first_name', 'last_name', 'password1', 'password2'),
+            'fields': ('first_name', 'last_name', 'country_code', 'phone_number', 'gender', 'birthdate', 'email', 'password1', 'password2'),
         }),
     )
     search_fields = ('first_name', 'last_name')
-    ordering = ('username',)
+    ordering = ('first_name',)
     filter_horizontal = ()
 
 
-# Now register the new UserAdmin...
 admin.site.register(CustomUser, CustomUserAdmin)
-# ... and, since we're not using Django's built-in permissions,
-# unregister the Group model from admin.
+# Unregister as we use our custom user model
 admin.site.unregister(Group)
