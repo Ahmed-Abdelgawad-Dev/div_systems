@@ -5,20 +5,16 @@ from django.utils.translation import gettext_lazy as _
 
 
 class CustomUserCreationForm(forms.ModelForm):
-    """A form for creating new users. Includes all the required
-    fields, plus a repeated password."""
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
-    password2 = forms.CharField(
-        label='Password confirmation', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
 
     class Meta:
         model = CustomUser
         # fields = ('username', 'first_name', 'last_name',
         #           'country_code', 'gender', 'birthdate', 'email',)
-        fields = "__all__"
+        fields = "__all__" # should not be like this (security wise)
 
     def clean_password2(self):
-        # Check that the two password entries match
         password1 = self.cleaned_data.get("password1")
         password2 = self.cleaned_data.get("password2")
         if password1 and password2 and password1 != password2:
@@ -39,4 +35,4 @@ class CustomUserChangeForm(forms.ModelForm):
         model = CustomUser
         # fields = ('username', 'first_name', 'last_name',
         #           'country_code', 'gender', 'birthdate', 'email',)
-        fields = "__all__"
+        fields = "__all__"  # should not be like this (security wise)

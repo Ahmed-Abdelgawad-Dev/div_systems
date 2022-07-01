@@ -1,16 +1,12 @@
 from rest_framework.response import Response
 import itertools
-from django.http import Http404
-from .models import CustomUser
+from django.conf import settings
 from .serializers import CustomUserSerializer, CustomUserSerializerWithToken
 from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth.hashers import make_password
-from rest_framework.status import HTTP_404_NOT_FOUND, HTTP_200_OK, HTTP_201_CREATED
-from rest_framework.decorators import api_view, permission_classes
-from django.http import HttpResponse, JsonResponse
+from rest_framework.decorators import api_view
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework.parsers import JSONParser
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
@@ -36,10 +32,11 @@ def register_user(request):
 
 class UserTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
-        data = super().validate(attrs)
+        data            = super().validate(attrs)
         serialized_user = CustomUserSerializerWithToken(self.user).data
-        res = dict(itertools.islice(serialized_user.items(), 3))
-        return res
+        print('Object: =>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', dict(
+            itertools.islice(serialized_user.items(), 2)))
+        return serialized_user['token']
 
 
 class UserTokenObtainPairView(TokenObtainPairView):
