@@ -1,13 +1,13 @@
 Task 1:
     End-point + Form:
-        - first_name
-        - last_name
-        - country_code (string)
-        - phone_number (validation: E.164 format, +xxxx ...etc, string)
-        - gender (options => select => male | female)
-        - birthday
-        - avatar (file_type accepts jpg, jpeg &png)
-        - email
+        DONE- first_name
+        DONE- last_name
+        DONE- country_code (string)
+        DONE- phone_number (validation: E.164 format, +xxxx ...etc, string)
+        DONE- gender (options => select => male | female)
+        DONE- birthday
+        DONE- avatar (file_type accepts jpg, jpeg &png)
+        DONE- email
 
 Responses:
     Example successful Response for a POST request should be as following:

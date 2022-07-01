@@ -13,7 +13,7 @@ class CustomUserAdmin(UserAdmin):
                     'country_code', 'phone_number', 'gender', 'birthdate', 'is_admin', 'avatar', 'email', 'is_staff', 'is_active', 'date_joined')
     list_filter = ('is_admin',)
     fieldsets = (
-        (None, {'fields': ('first_name', 'password')}),
+        (None, {'fields': ('first_name', 'last_name')}),
         ('Personal info', {'fields': (
             'country_code', 'phone_number', 'gender', 'birthdate', 'avatar', 'email',)}),
         ('Permissions', {'fields': ('is_admin', 'is_staff', 'is_active',)}),

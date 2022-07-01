@@ -9,7 +9,7 @@ from .managers import AccountsManager
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
-    DEFAULT_GENDER = 'Male'
+    DEFAULT_GENDER = 'male'
     GENDERS = [('Male', 'male'), ('Female', 'female')]
     first_name = models.CharField(max_length=255, unique=True)
     last_name = models.CharField(
@@ -29,10 +29,11 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         upload_to='avatars/', default='images/default_image.png')
     email = models.EmailField(
         _('email address'), unique=True, blank=True, null=True, help_text="Please enter your Email...")
-    is_staff = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=True)
-    is_admin = models.BooleanField(default=False)
-    date_joined = models.DateTimeField(auto_now_add=True)
+    is_staff = models.BooleanField(default=False, blank=True, null=True)
+    is_active = models.BooleanField(default=True, blank=True, null=True)
+    is_admin = models.BooleanField(default=False, blank=True, null=True)
+    date_joined = models.DateTimeField(
+        auto_now_add=True, blank=True, null=True)
 
     USERNAME_FIELD = 'first_name'
     REQUIRED_FIELDS = ['last_name']
