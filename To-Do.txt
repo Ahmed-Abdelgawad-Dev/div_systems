@@ -10,11 +10,11 @@ Task 1:
         DONE- email
 
 Responses:
-    Example successful Response for a POST request should be as following:
+    DONE- Example successful Response for a POST request should be as following:
     { "id": 1, "first_name": "Ali", "last_name": "Gamal", "country_code":
     "EG", "phone_number": "01001234567", "gender": "male", "birthdate":
     "1988-03-29" }
-    Failing should be formatted as following:
+    PENDING- Failing should be formatted as following:
     { "errors": { "first_name": [ { "error": "blank" } ], "last_name": [ { "error":
     "blank" } ], "country_code":[ { "error": "inclusion" } ], "phone_number":
     [ { "error": "blank" }, { "error": "not_a_number" }, { "error":

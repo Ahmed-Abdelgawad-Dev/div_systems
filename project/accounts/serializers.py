@@ -1,5 +1,8 @@
 from rest_framework import serializers
 from .models import CustomUser
+from accounts.models import CustomUser
+from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 
 class CustomUserSerializer(serializers.ModelSerializer):
@@ -15,19 +18,24 @@ class CustomUserSerializer(serializers.ModelSerializer):
         model = CustomUser
         fields = ['id', 'first_name', 'last_name', 'country_code',
                   'country_code', 'phone_number', 'gender', 'birthdate']
-        extra_kwargs = {
-            "errors":
-                {"first_name": [{"error": "blank"}],
-                 "last_name": [{"error": "blank"}],
-                 "country_code": [{"error": "inclusion"}],
-                 "phone_number": [{"error": "blank"}, {"error": "not_a_number"},
-                                  {"error": "not_exist"},
-                                  {"error": "invalid"},
-                                  {"error": "taken"},
-                                  {"error": "too_short", "count": 10},
-                                  {"error": "too_long", "count": 15}],
-                 "gender": [{"error": "inclusion"}],
-                 "birthdate": [{"error": "blank"}, {"error": "in_the_future"}],
-                 "avatar": [{"error": "blank"}, {"error": "invalid_content_type"}],
-                 "email": [{"error": "taken"}, {"error": "invalid"}]}
-        }
+
+
+class CustomUserSerializerWithToken(CustomUserSerializer):
+    token = serializers.SerializerMethodField(read_only=True)
+
+    class Meta:
+        model = CustomUser
+        fields = ['phone_number', 'password', 'token']
+
+    def get_token(self, obj):
+        token = RefreshToken.for_user(obj)
+        return str(token.access_token)
+
+
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    def validate(self, attrs):
+        data = super().validate(attrs)
+        serialized_user = CustomUserSerializerWithToken(self.user).data
+        for key, value in serialized_user.items():
+            data[key] = value
+        return data
