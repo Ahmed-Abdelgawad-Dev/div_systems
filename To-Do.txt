@@ -25,8 +25,8 @@ Responses:
     "invalid_content_type" } ], "email": [{ "error": "taken" }, { "error":
     "invalid" } ] } }
 
-Note: HTTP status code is 201 if new user else the suitable http status code
-should be returned.  
+Done - Note: HTTP status code is 201 if new user else the suitable http status code
+        should be returned.  
 
 -------------------------------------------------------------------------------
 

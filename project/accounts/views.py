@@ -1,6 +1,6 @@
 from rest_framework.response import Response
 import itertools
-from django.conf import settings
+
 from .serializers import CustomUserSerializer, CustomUserSerializerWithToken
 from rest_framework.response import Response
 from rest_framework import status
@@ -41,3 +41,6 @@ class UserTokenObtainPairSerializer(TokenObtainPairSerializer):
 
 class UserTokenObtainPairView(TokenObtainPairView):
     serializer_class = UserTokenObtainPairSerializer
+
+"""--------------------------------------------------------------------------"""
+

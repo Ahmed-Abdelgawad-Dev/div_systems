@@ -6,7 +6,15 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 import datetime
 from .managers import AccountsManager
+from django.core.exceptions import ValidationError
+import os
 
+
+def validate_avatar(value):
+    ext = os.path.splitext(value.name)[1]  # [0] returns path+filename
+    valid_extensions = ['.jpeg''.jpg', '.png']
+    if not ext.lower() in valid_extensions:
+        raise ValidationError('Please upload images of type {jpg, jpeg, png} only.')
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     DEFAULT_GENDER = 'male'
@@ -19,7 +27,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     phone_number = PhoneNumberField()
     gender       = models.CharField(choices = GENDERS,default = DEFAULT_GENDER, max_length = 50)
     birthdate = models.DateField(_("Birthdate"), default = datetime.date(2010, 1, 1),auto_now_add = False,  auto_now= False)
-    avatar = models.ImageField(upload_to='avatars/', default='default_image.png')
+    avatar = models.FileField(
+        upload_to='avatars/', default='default_image.png', validators=[validate_avatar])
     email = models.EmailField(_('email address'), unique=True, blank=True, null=True, help_text="Your Email...")
     
     is_staff    = models.BooleanField(default=False, blank=True, null=True)
@@ -28,7 +37,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(auto_now_add=True, blank=True, null=True)
 
     USERNAME_FIELD = 'first_name'
-    REQUIRED_FIELDS = ['last_name']
+    REQUIRED_FIELDS = ['last_name', 'phone_number',]
 
     objects = AccountsManager()
 
@@ -44,3 +53,5 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
             raise ValidationError(
                 "Birthdate must be in the past.")
         super(CustomUser, self).save(*args, **kwargs)
+    
+

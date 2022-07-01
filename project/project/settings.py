@@ -3,6 +3,7 @@ from datetime import timedelta
 import os
 import dotenv
 
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -10,7 +11,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 dotenv.load_dotenv()
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
-DEBUG = True  # False in Pro
+DEBUG = True  # False in Prod
 
 ALLOWED_HOSTS = []
 
@@ -135,3 +136,4 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 # This must be changed on production (Security Wise)
 # Django v.4 does not support local host as per docs,
 CORS_ALLOW_ALL_ORIGINS = True
+
