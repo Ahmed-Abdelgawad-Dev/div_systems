@@ -9,8 +9,8 @@ Task 1:
         DONE- avatar (file_type accepts jpg, jpeg &png)
         DONE- email
 
-Responses:
-    DONE- Example successful Response for a POST request should be as following:
+DONE - Responses:
+    Example successful Response for a POST request should be as following:
     { "id": 1, "first_name": "Ali", "last_name": "Gamal", "country_code":
     "EG", "phone_number": "01001234567", "gender": "male", "birthdate":
     "1988-03-29" }
@@ -30,8 +30,8 @@ Done - Note: HTTP status code is 201 if new user else the suitable http status c
 
 -------------------------------------------------------------------------------
 
-Task 2:
-End-point accepts PASSWORD & PHONE NUMBER & returns unique AUTH-TOKEN along the response upon success.
+DONE - Task 2:
+        End-point accepts PASSWORD & PHONE NUMBER & returns unique AUTH-TOKEN along the response upon success.
 
 -------------------------------------------------------------------------------
 
