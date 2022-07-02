@@ -11,24 +11,24 @@ import os
 
 
 def validate_avatar(value):
-    ext = os.path.splitext(value.name)[1]  # [0] returns path+filename
+    ext              = os.path.splitext(value.name)[1]
     valid_extensions = ['.jpeg''.jpg', '.png']
     if not ext.lower() in valid_extensions:
-        raise ValidationError('Please upload images of type {jpg, jpeg, png} only.')
+        raise ValidationError('Please upload images of type { jpg, jpeg, png } only.')
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
+    
     DEFAULT_GENDER = 'male'
     GENDERS        = [('Male', 'male'), ('Female', 'female')]
     
     first_name     = models.CharField(max_length=255, unique=True)
     last_name      = models.CharField(max_length=255,  unique=True)
     country_code = models.CharField(max_length=255)
-    # django-phonenumber-field=>input string => E164 format in DB by default
+    # Django-phonenumber-field => input string => E164 format in DB by default.
     phone_number = PhoneNumberField()
     gender       = models.CharField(choices = GENDERS,default = DEFAULT_GENDER, max_length = 50)
     birthdate = models.DateField(_("Birthdate"), default = datetime.date(2010, 1, 1),auto_now_add = False,  auto_now= False)
-    avatar = models.FileField(
-        upload_to='avatars/', default='default_image.png', validators=[validate_avatar])
+    avatar = models.FileField(upload_to='avatars/', default='default_image.png', validators=[validate_avatar])
     email = models.EmailField(_('email address'), unique=True, blank=True, null=True, help_text="Your Email...")
     
     is_staff    = models.BooleanField(default=False, blank=True, null=True)
