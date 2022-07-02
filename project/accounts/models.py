@@ -24,11 +24,11 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     
     user_name    = models.CharField(max_length=255)
     
-    first_name   = models.CharField(max_length=255,unique=True)
+    first_name   = models.CharField(max_length=255)
     last_name    = models.CharField(max_length=255)
     country_code = models.CharField(max_length=255)
     # Django-phonenumber-field => input string => E164 format in DB by default.
-    phone_number = PhoneNumberField()
+    phone_number = PhoneNumberField(unique=True)
     gender       = models.CharField(choices = GENDERS,default = DEFAULT_GENDER, max_length = 50)
     birthdate    = models.DateField(_("Birthdate"), default = datetime.date(2010, 1, 1),auto_now_add = False,  auto_now= False)
     avatar       = models.FileField(upload_to='avatars/', default='default_image.png', validators=[validate_avatar])
@@ -39,8 +39,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     is_admin    = models.BooleanField(default=False)
     date_joined = models.DateTimeField(auto_now_add=True)
 
-    USERNAME_FIELD = 'first_name'
-    REQUIRED_FIELDS = ['last_name', 'user_name']
+    USERNAME_FIELD = 'phone_number'
+    REQUIRED_FIELDS = ['first_name','last_name', 'user_name']
 
     objects = AccountsManager()
 

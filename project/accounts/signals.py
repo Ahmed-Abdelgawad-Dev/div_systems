@@ -7,6 +7,6 @@ from .models import CustomUser
 def auto_rename_user(sender, instance, **kwargs):
     user = instance
     if user.user_name == '':
-        #Generate a username from first&last_name
+        # Generate a username from first&last_name
         user.user_name = str(user.first_name).capitalize() + \
             " " + str(user.last_name).capitalize()

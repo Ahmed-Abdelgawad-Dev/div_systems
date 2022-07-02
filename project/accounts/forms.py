@@ -10,8 +10,6 @@ class CustomUserCreationForm(forms.ModelForm):
 
     class Meta:
         model = CustomUser
-        # fields = ('username', 'first_name', 'last_name',
-        #           'country_code', 'gender', 'birthdate', 'email',)
         fields = "__all__" # should not be like this (security wise)
 
     def clean_password2(self):
