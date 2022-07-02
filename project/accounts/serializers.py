@@ -21,8 +21,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
 
 class CustomUserSerializerWithToken(CustomUserSerializer):
     token        = serializers.SerializerMethodField(read_only=True)
-    phone_number = serializers.SerializerMethodField(
-        read_only=True, required=False)
+    phone_number = serializers.SerializerMethodField(read_only=True, required=False)
 
     class Meta:
         model  = CustomUser
@@ -31,9 +30,6 @@ class CustomUserSerializerWithToken(CustomUserSerializer):
     def get_token(self, obj):
         token = RefreshToken.for_user(obj)
         return str(token.access_token)
-
-    def get__id(self, obj):
-        return obj.id
 
     def get_phone_number(self, obj):
         return obj.phone_number

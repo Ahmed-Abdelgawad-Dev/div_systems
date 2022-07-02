@@ -38,7 +38,9 @@ def register_user(request):
     if request.method == 'POST':
         if request.data['password']:
             password  = make_password(request.data['password'])
-        serializer    = CustomUserSerializer(data=request.data, files=request.FILES)# Files Specific
+        # if accepts Files =>  += {files=request.FILES} after data 
+        # + input type=file multiple at html forms
+        serializer = CustomUserSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)

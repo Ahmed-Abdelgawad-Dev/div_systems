@@ -1,3 +1,4 @@
+from email.policy import default
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import AbstractBaseUser
@@ -21,23 +22,25 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     DEFAULT_GENDER = 'male'
     GENDERS        = [('Male', 'male'), ('Female', 'female')]
     
-    first_name     = models.CharField(max_length=255, unique=True)
-    last_name      = models.CharField(max_length=255,  unique=True)
+    user_name    = models.CharField(max_length=255)
+    
+    first_name   = models.CharField(max_length=255,unique=True)
+    last_name    = models.CharField(max_length=255)
     country_code = models.CharField(max_length=255)
     # Django-phonenumber-field => input string => E164 format in DB by default.
     phone_number = PhoneNumberField()
     gender       = models.CharField(choices = GENDERS,default = DEFAULT_GENDER, max_length = 50)
-    birthdate = models.DateField(_("Birthdate"), default = datetime.date(2010, 1, 1),auto_now_add = False,  auto_now= False)
-    avatar = models.FileField(upload_to='avatars/', default='default_image.png', validators=[validate_avatar])
-    email = models.EmailField(_('email address'), unique=True, blank=True, null=True, help_text="Your Email...")
+    birthdate    = models.DateField(_("Birthdate"), default = datetime.date(2010, 1, 1),auto_now_add = False,  auto_now= False)
+    avatar       = models.FileField(upload_to='avatars/', default='default_image.png', validators=[validate_avatar])
+    email        = models.EmailField(_('email address'), blank=True, null=True, help_text="Your Email...")
     
-    is_staff    = models.BooleanField(default=False, blank=True, null=True)
-    is_active   = models.BooleanField(default=True, blank=True, null=True)
-    is_admin    = models.BooleanField(default=False, blank=True, null=True)
-    date_joined = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    is_staff    = models.BooleanField(default=False)
+    is_active   = models.BooleanField(default=True)
+    is_admin    = models.BooleanField(default=False)
+    date_joined = models.DateTimeField(auto_now_add=True)
 
     USERNAME_FIELD = 'first_name'
-    REQUIRED_FIELDS = ['last_name', 'phone_number',]
+    REQUIRED_FIELDS = ['last_name', 'user_name']
 
     objects = AccountsManager()
 
