@@ -1,0 +1,33 @@
+Technical notes for Mr.Amr & more:
+    
+    - You wanted to know how long does it take to finalize tasks, I would say it takes a day approximately,
+        or a bit less but it took me 1 day and half to achieve the 1st task, as I went to the wrong approach 
+        to implement a custom backend authentication in parralel with the default username field
+        and that took me to a loop hole.
+        I believe that was wrong although I found the solution was only making the phone field 
+        the default one and that was so easy, sometimes easy things would be away from your mind
+        it happens rarely.
+    
+    - First 2 tasks are done, 3rd one is not as I took long and decided to send what I've done.
+    
+    - There are other approaches I would go with in real world apps, like splitting the API code
+        from the accounts app, renaming endpoints withh other names and write better README,
+        but this is for the purpose of the assessment. 
+    
+    - autopep8 is used for formating but there are lines aligned in purpose to be clearer (prefered by myself).
+    
+    - There are other customization I would go with, but for these tasks that works.
+    - 
+    - formatting response of task one in case of failure is not exactly the same, but very similar,
+        I would change it field by field but find {DRY princible} would be disturbed.
+    
+    - Extending {AbstractBaseUser} might seem alot, and would be easier to use {AbstractUser},
+        but it's just preferable for me to override default fields and begin from down up.
+
+    - I did not make tests coz of time, and I believe I need to work on my testing skills too.
+
+AT LAST: that might be alot to write, but I believe this would help you understand my experience & 
+my mindset and lead to take the right decision in general for both of us.
+
+Please feel free to ask if you have any question
+Thanks Mr.Amr for your consideration & and would love to read your feed-back on my code if possible whenever you have time that helps me to improve alot.
