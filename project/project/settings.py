@@ -10,7 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 dotenv.load_dotenv()
 # SECRET_KEY = os.environ.get('SECRET_KEY')
-# Same key as in the .env, left for quick access. 
+# Same key as in the .env, left for a quick access. 
 SECRET_KEY = 'django-insecure-f7hk-stql)#qu-b%fyla)oy9&_ts$qfm=+=g6p-9$bin=cn=im'
 
 DEBUG = True  # False in Prod
@@ -139,5 +139,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
 # This must be changed on production (Security Wise)
-# Django v.4 does not support local host as per docs,
+# Django v.4 does not support local host as per docs, 
 CORS_ALLOW_ALL_ORIGINS = True
+"""
+Could be like below when debugging or we can
+make a settings folder and make diff mode files 
+and redirect manage.py to specific mode file...etc.
+
+if DEBUG:
+    CORS_ALLOW_ORIGINS +=[
+        --------,
+        ------
+    ]
+"""

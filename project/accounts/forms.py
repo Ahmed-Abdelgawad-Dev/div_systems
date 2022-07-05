@@ -10,7 +10,8 @@ class CustomUserCreationForm(forms.ModelForm):
 
     class Meta:
         model = CustomUser
-        fields = "__all__" # should not be like this (security wise)
+        # Better to use tuple (security wise).
+        fields = "__all__"
 
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1")
@@ -20,7 +21,7 @@ class CustomUserCreationForm(forms.ModelForm):
         return password2
 
     def save(self, commit=True):
-        # Save the provided password in hashed format
+        # Save the provided password in hashed format.
         user = super().save(commit=False)
         user.set_password(self.cleaned_data["password1"])
         if commit:
@@ -31,6 +32,5 @@ class CustomUserCreationForm(forms.ModelForm):
 class CustomUserChangeForm(forms.ModelForm):
     class Meta:
         model = CustomUser
-        # fields = ('username', 'first_name', 'last_name',
-        #           'country_code', 'gender', 'birthdate', 'email',)
-        fields = "__all__"  # should not be like this (security wise)
+        # Better to use tuple (security wise).
+        fields = "__all__"  

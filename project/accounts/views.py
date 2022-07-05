@@ -55,15 +55,13 @@ class UserTokenObtainPairView(TokenObtainPairView):
 @csrf_exempt
 @permission_classes([IsAuthenticated])
 def phone_token_login(request):
-        # if request.method=="POST":
-            
-        # if request.user.is_authenticated:
-        #     data={}
-        #     first_name=request.
-        # serializer = CustomUserSerializer(data=request.data)
-        # if serializer.is_valid():
-        #     serializer.save()
-        #     return Response(serializer.data, status=status.HTTP_201_CREATED)
-        # print(serializer.errors)
-        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    pass
+    if request.method=="POST":
+        print('REQUEST =>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', request)
+        if request.user.is_authenticated:
+            data={}
+        serializer = CustomUserSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        print(serializer.errors)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

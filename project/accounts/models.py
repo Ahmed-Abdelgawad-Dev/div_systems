@@ -1,21 +1,12 @@
-from email.policy import default
 from django.db import models
+import datetime
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import AbstractBaseUser
-from phonenumber_field.modelfields import PhoneNumberField
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
-import datetime
+from phonenumber_field.modelfields import PhoneNumberField
 from .managers import AccountsManager
-from django.core.exceptions import ValidationError
-import os
-
-
-def validate_avatar(value):
-    ext              = os.path.splitext(value.name)[1]
-    valid_extensions = ['.jpeg''.jpg', '.png']
-    if not ext.lower() in valid_extensions:
-        raise ValidationError('Please upload images of type { jpg, jpeg, png } only.')
+from .validators import validate_avatar
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     
@@ -33,7 +24,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     birthdate    = models.DateField(_("Birthdate"), default = datetime.date(2010, 1, 1),auto_now_add = False,  auto_now= False)
     avatar       = models.FileField(upload_to='avatars/', default='default_image.png', validators=[validate_avatar])
     email        = models.EmailField(_('email address'), blank=True, null=True, help_text="Your Email...")
-    
+    # Extra fields that normally better to have.
     is_staff    = models.BooleanField(default=False)
     is_active   = models.BooleanField(default=True)
     is_admin    = models.BooleanField(default=False)
